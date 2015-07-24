@@ -6,6 +6,8 @@ This is the client side framework used for creator live mode. It is desined unde
 
 From the pattern we can divide framework into three major parts.
 
+#### Framework Component
+
 1. Controller
   * Controls the entire system comprise of model and view
 2. Model
@@ -16,6 +18,8 @@ From the pattern we can divide framework into three major parts.
 
 
 Each of the above objects should create for individual creator components
+
+#### Creator Component
 
 - Application
 - Form
@@ -43,11 +47,15 @@ Controller.ApplicationController.create({
   model : {appname:"IT ASSET",linkname:"it-asset"};
 });
 ```
-Here
+
 *Controller* is *Primary Namespace*
+***
 *ApplicationController* is *Secondary Namespace*
+***
 *create* is *Constructor function*
+***
 *model* is *Argument*
+***
 
 Similarly to create a form model following will be the convention
 
@@ -62,10 +70,10 @@ Model.FormModel.create({
 
 Since all the componenent are tightly coupled we need to create in a ordered sequence
 
-1. Create Model
-2. Create Controller using Model create in previous step
-1. Create DOM using the above Model
-4. Create View with the DOM object
+1. Create Model from source meta JSON
+2. Create DOM using the above Model
+3. Create View with the DOM object
+4. Create Controller using Model and View create in previous steps
 
 Here is the example usage code to create form controller
 
@@ -87,3 +95,37 @@ var formController = Controller.FormController.create({
   view : formView
 });
 ```
+
+## Factories
+
+Each components are stored in corresponding factory. In Controller Factory you can create all component controllers, similarly for Model and View Factory.
+
+> FactoryClass is the super class of all framework components.
+
+In case of Model Object, ModelFactory is the super class. Form, Report and Field Models are extended from the ModelFactory and this is same for all framework components
+
+## Folder and files
+
+All the files are located under client folder named after framework components. Check out the folder in breif
+
+### controllers
+
+This folder contains all creator component Controllers js and ControllerFactory js
+
+controllerfactory.js
+***
+It contains staic API to create controller which is a global object under window context
+It also contains ControllerFactory object with Model as constructor parameter
+
+
+
+## Create a new creator component
+
+To create new component say Form, Report, Field.. follow the bulletins
+
+1. Add component decleration in corresponding js
+2. Create API to create instance in each Factory
+3. Proceed with the definition
+
+
+ 
